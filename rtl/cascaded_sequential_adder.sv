@@ -40,7 +40,7 @@ module cascaded_sequential_adder (
         cout <= cout_saved;
     end
     
-    // use cascaded adder
+    // use cascaded ripple carry adder
 //    cascaded_rc_adder adder(
 //        .a(a_saved),
 //        .b(b_saved),
