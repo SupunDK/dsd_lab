@@ -1,5 +1,5 @@
 
-module pipelined_sequential_adder (
+module pipelined_adder (
 	input logic [31:0] a,
 	input logic [31:0] b,
 	output logic [31:0] s,
