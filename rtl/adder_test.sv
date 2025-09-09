@@ -26,23 +26,23 @@ module adder_test (
 
     always_ff @(posedge clk) begin : read_logic
         if (!rstn) begin
-            addrb <= 'h0;   // Read address
-            valid_in <= 'h0;
+            addrb <= 5'h0;   // Read address
+            valid_in <= 1'h0;
             read_wait <= 1'h1;
 
         end else if (read_wait) begin
             read_wait <= 1'h0;
-            addrb <= addrb + 'h1;
+            addrb <= addrb + 5'h1;
 
         end else begin
             if (addrb[0] == 1) begin  // Read cycle 0
                 a <= doutb;
                 valid_in <= 0;
-                addrb <= addrb + 'h3;
+                addrb <= addrb + 5'h3;
             end else begin  // Read cycle 1
                 b <= doutb;
-                valid_in <= 'h1;
-                addrb <= addrb + 'h1;
+                valid_in <= 1'h1;
+                addrb <= addrb + 5'h1;
             end
         end
     end
@@ -50,8 +50,8 @@ module adder_test (
     always_ff @(posedge clk) begin : write_logic
         if (!rstn) begin
             addra <= -1;   // Write address
-            valid_out_saved <= 'h0;
-            wea <= 'h0;
+            valid_out_saved <= 1'h0;
+            wea <= 1'h0;
 
         end else begin
             valid_out_saved <= valid_out;
@@ -63,11 +63,11 @@ module adder_test (
                     cout_saved <= cout;
                     dina <= s;
                     wea <= 'h1;
-                    addra <= addra + 'h3;
+                    addra <= addra + 5'h3;
                 end else begin  // Write cycle 1
                     dina <= cout_saved;
                     wea <= 'h1;
-                    addra <= addra + 'h1;
+                    addra <= addra + 5'h1;
                 end
 
             end else begin
