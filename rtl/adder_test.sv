@@ -12,14 +12,26 @@ module adder_test (
     logic cout_saved, valid_out_saved;
     logic read_wait;
 
+    // for quartus
+//    bram test_bram (
+//        .clock(clk),
+//        .wren(wea),
+//        .wraddress(addra),
+//        .data(dina),
+//        // .clkb(clk),
+//        .rdaddress(addrb),
+//        .q(doutb)
+//    );
+    
+    // for vivado
     bram test_bram (
-        .clock(clk),
-        .wren(wea),
-        .wraddress(addra),
-        .data(dina),
-        // .clkb(clk),
-        .rdaddress(addrb),
-        .q(doutb)
+        .clka(clk),
+        .wea(wea),
+        .addra(addra),
+        .dina(dina),
+        .clkb(clk),
+        .addrb(addrb),
+        .doutb(doutb)
     );
 
     assign cin = 0;
