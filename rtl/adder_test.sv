@@ -10,16 +10,16 @@ module adder_test (
     logic [4:0] addra, addrb;
     logic [31:0] dina, doutb;
     logic cout_saved, valid_out_saved;
+    logic read_wait;
 
     bram test_bram (
-        .clka(clk),
-        .wea(wea),
-        .addra(addra),
-        .dina(dina),
-
-        .clkb(clk),
-        .addrb(addb),
-        .doutb(doutb)
+        .clock(clk),
+        .wren(wea),
+        .wraddress(addra),
+        .data(dina),
+        // .clkb(clk),
+        .rdaddress(addrb),
+        .q(doutb)
     );
 
     assign cin = 0;
@@ -28,16 +28,21 @@ module adder_test (
         if (!rstn) begin
             addrb <= 'h0;   // Read address
             valid_in <= 'h0;
+            read_wait <= 1'h1;
+
+        end else if (read_wait) begin
+            read_wait <= 1'h0;
+            addrb <= addrb + 'h1;
 
         end else begin
-            if (addrb[0] == 0) begin  // Read cycle 0
+            if (addrb[0] == 1) begin  // Read cycle 0
                 a <= doutb;
                 valid_in <= 0;
-                addrb <= addrb + 'h1;
+                addrb <= addrb + 'h3;
             end else begin  // Read cycle 1
                 b <= doutb;
                 valid_in <= 'h1;
-                addrb <= addrb + 'h3;
+                addrb <= addrb + 'h1;
             end
         end
     end

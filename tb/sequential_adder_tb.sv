@@ -7,7 +7,7 @@ module sequential_adder_tb();
 	logic cin = 0;
 	logic cout;
 	
-	cascaded_32_adder adder32 (.*);
+	cascaded_rc_adder adder32 (.*);
 	
 	initial begin
 		repeat(200) begin 

@@ -8,7 +8,7 @@ module adder32_tb();
 	logic cout;
 	logic clk = 0;
 	
-	pipelined_sequential_adder adder32 (.*);
+	cascaded_sequential_adder adder32 (.*);
 	
 	parameter CLK_PERIOD = 2;
 	

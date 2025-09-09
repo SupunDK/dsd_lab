@@ -14,7 +14,7 @@ module n_bit_cla_adder
     
     genvar i;
     generate
-        for (i = 0; i < N-1; i = i + 1) begin
+        for (i = 0; i < N-1; i = i + 1) begin : cla
             assign carry[i+1] = (a[i] & b[i]) | ( (a[i]^b[i]) & carry[i]);
         end
     endgenerate

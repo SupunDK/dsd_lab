@@ -7,7 +7,7 @@ module n_bit_adder_tb();
 	logic cin = 0;
 	logic cout;
 	
-	n_bit_adder #(.N(N)) adder8 (.*);
+	n_bit_rc_adder #(.N(N)) adder8 (.*);
 	
 	initial begin
 		a = 10;
