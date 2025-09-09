@@ -13,26 +13,25 @@ module adder_test (
     logic read_wait;
 
     // for quartus
-//    bram test_bram (
-//        .clock(clk),
-//        .wren(wea),
-//        .wraddress(addra),
-//        .data(dina),
-//        // .clkb(clk),
-//        .rdaddress(addrb),
-//        .q(doutb)
-//    );
+   bram test_bram (
+       .clock(clk),
+       .wren(wea),
+       .wraddress(addra),
+       .data(dina),
+       .rdaddress(addrb),
+       .q(doutb)
+   );
     
     // for vivado
-    bram test_bram (
-        .clka(clk),
-        .wea(wea),
-        .addra(addra),
-        .dina(dina),
-        .clkb(clk),
-        .addrb(addrb),
-        .doutb(doutb)
-    );
+    // bram test_bram (
+    //     .clka(clk),
+    //     .wea(wea),
+    //     .addra(addra),
+    //     .dina(dina),
+    //     .clkb(clk),
+    //     .addrb(addrb),
+    //     .doutb(doutb)
+    // );
 
     assign cin = 0;
 
@@ -49,7 +48,7 @@ module adder_test (
         end else begin
             if (addrb[0] == 1) begin  // Read cycle 0
                 a <= doutb;
-                valid_in <= 0;
+                valid_in <= 1'h0;
                 addrb <= addrb + 5'h3;
             end else begin  // Read cycle 1
                 b <= doutb;
@@ -74,16 +73,16 @@ module adder_test (
                 if (valid_out) begin    // Write cycle 0
                     cout_saved <= cout;
                     dina <= s;
-                    wea <= 'h1;
+                    wea <= 1'h1;
                     addra <= addra + 5'h3;
                 end else begin  // Write cycle 1
                     dina <= cout_saved;
-                    wea <= 'h1;
+                    wea <= 1'h1;
                     addra <= addra + 5'h1;
                 end
 
             end else begin
-                wea <= 'h0;
+                wea <= 1'h0;
             end
         end
     end
