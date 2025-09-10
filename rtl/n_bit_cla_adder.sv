@@ -8,17 +8,17 @@ module n_bit_cla_adder
 );
 
 	
-    logic [N-1:0] carry;
+    logic [N:0] carry;
     
     assign carry[0] = cin;
     
     genvar i;
     generate
-        for (i = 0; i < N-1; i = i + 1) begin : cla
+        for (i = 0; i < N; i = i + 1) begin : cla
             assign carry[i+1] = (a[i] & b[i]) | ( (a[i]^b[i]) & carry[i]);
         end
     endgenerate
 	
-	assign cout = carry[N-1];
+	assign cout = carry[N];
 	assign s = a^b^carry;
 endmodule
